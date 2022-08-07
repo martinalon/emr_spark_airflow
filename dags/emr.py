@@ -6,7 +6,7 @@ from airflow.providers.amazon.aws.operators.emr_create_job_flow import (
 )
 from airflow.providers.amazon.aws.sensors.emr_job_flow import EmrJobFlowSensor
 from airflow.utils.dates import days_ago
-from pip.operations import freeze
+#from pip.operations import freeze
 
 DEFAULT_ARGS = {
     "owner": "airflow",

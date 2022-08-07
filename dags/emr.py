@@ -6,6 +6,7 @@ from airflow.providers.amazon.aws.operators.emr_create_job_flow import (
 )
 from airflow.providers.amazon.aws.sensors.emr_job_flow import EmrJobFlowSensor
 from airflow.utils.dates import days_ago
+from pip.operations import freeze
 
 DEFAULT_ARGS = {
     "owner": "airflow",
@@ -80,6 +81,10 @@ with DAG(
         job_flow_id="{{ task_instance.xcom_pull(task_ids='create_job_flow', key='return_value') }}",
         aws_conn_id="aws_default",
     )
+    
+    pip_task = BashOperator(
+      task_id="pip_task",
+      bash_command='pip freeze')
 
-    job_flow_creator >> job_sensor
+    pip_task >> job_flow_creator >> job_sensor
     # [END howto_operator_emr_automatic_steps_tasks]

@@ -75,7 +75,7 @@ with DAG(
         job_flow_overrides=JOB_FLOW_OVERRIDES,
         aws_conn_id="aws_default",
         emr_conn_id="emr_default",
-        region_name= "us-east-2"
+        region_name= None,
     )
 
     job_sensor = EmrJobFlowSensor(
